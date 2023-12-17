@@ -1,0 +1,51 @@
+name: Deploy
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install mdbook
+        run: cargo install mdbook
+
+      - name: Install emscripten
+        run: sudo apt-get install -y --no-install-recommends emscripten
+
+      - name: Add wasm32-unknown-emscripten toolchain
+        run: rustup target add wasm32-unknown-emscripten
+
+      - name: Build book
+        run: mdbook build
+
+      - name: Build playground
+        run: BOOK_OUTPUT_PATH="$PWD/book" cargo build --release --manifest-path=lua-playground/Cargo.toml --target wasm32-unknown-emscripten
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v2
+
+      - name: Upload book
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: ./book
+
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v1

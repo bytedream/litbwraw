@@ -1,0 +1,13 @@
+[book]
+authors = ["bytedream"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Lua in the Browser, with Rust and WebAssembly"
+
+[output.html]
+additional-js = ["lua-playground/lua-playground-loader.js"]
+git-repository-url = "https://github.com/bytedream/litbwraw"
+
+[output.html.playground]
+editable = true
