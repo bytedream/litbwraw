@@ -22,7 +22,9 @@ Before you can start writing actual code you have to set up some files in the ne
 ### `Cargo.toml`
 
 The `mlua` dependency is the actual lua library which we'll use.
-The features `lua51`, `lua53`, `lua54` and `luau` are wasm compatible lua version (`lua53` is currently broken because I accidentally removed a function in the PR which added wasm support, oops).
+At least version `0.9.3` is required, as this is the first version which supports wasm.
+The features `lua51`, `lua52`, `lua53`, `lua54` and `luau` are wasm compatible lua version.
+The `vendored` feature is always required for wasm.
 ```toml
 [package]
 name = "my-project"
@@ -30,7 +32,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-mlua = { git = "https://github.com/khvzak/mlua.git", features = ["lua51"] }
+mlua = { version = ">=0.9.3", features = ["lua51", "vendored"] }
 ```
 
 > If your crate is a library, you have to additionally add this:
