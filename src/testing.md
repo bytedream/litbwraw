@@ -8,8 +8,8 @@ You have to specify the test runner which executes the Javascript, either in the
 If your crate is a library, you also have to remove the `-o<library name>.js` compiler option as it modifies the output filename which the Rust test suite can't track.
 Because the `test` subcommand compiles the tests as normal binaries, the Emscripten compiler automatically creates the js glue.
 
-> Also, in the current stable Rust, you have to set the `-sERROR_ON_UNDEFINED_SYMBOLS=0` compiler option in order to avoid test compilation errors. This is due to an incompatibility between emscripten and the internal Rust libc crate ([rust-lang/rust#116655](https://github.com/rust-lang/rust/issues/116655)) but a fix for it should land in Rust 1.75 ([rust-lang/rust#116527](https://github.com/rust-lang/rust/pull/116527)).
-> Alternatively you can use the nightly toolchain, the fix is already present there.
+> Before Rust 1.75 there were a major incompatibility between emscripten and the internal Rust libc crate ([rust-lang/rust#116655](https://github.com/rust-lang/rust/issues/116655)) which always resulted in a compiler error.
+> To prevent this issue, you have to set the `-sERROR_ON_UNDEFINED_SYMBOLS=0` compiler option.
 
 With this done, we can create a simple test:
 ```rust,ignore
