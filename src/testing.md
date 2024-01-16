@@ -3,7 +3,7 @@
 Testing is not very different from testing any other ordinary Rust crate.
 
 When running tests, Rust tries to execute the generated Javascript glue directly which will result in an error.
-You have to specify the test runner which executes the Javascript, either in the `.cargo/config.toml` file (described [here]()) or via the `CARGO_TARGET_WASM32_UNKNOWN_EMSCRIPTEN_RUNNER` env variable to `node --experimental-default-type=module`.
+You have to specify the test runner which executes the Javascript, either in the `.cargo/config.toml` file (described [here](./tutorial/creating-a-project.md#cargoconfigtoml-optional)) or via the `CARGO_TARGET_WASM32_UNKNOWN_EMSCRIPTEN_RUNNER` env variable to `node --experimental-default-type=module`.
 <br>
 If your crate is a library, you also have to remove the `-o<library name>.js` compiler option as it modifies the output filename which the Rust test suite can't track.
 Because the `test` subcommand compiles the tests as normal binaries, the Emscripten compiler automatically creates the js glue.
