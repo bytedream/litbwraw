@@ -7,4 +7,4 @@ edition = "2021"
 crate-type = ["cdylib"]
 
 [dependencies]
-mlua = { git = "https://github.com/khvzak/mlua.git", features = ["lua51"] }
+mlua = { version = ">=0.9.3", features = ["lua51", "vendored"] }
