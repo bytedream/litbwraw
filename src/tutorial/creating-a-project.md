@@ -2,15 +2,15 @@
 
 ## Create the project package
 
-First, you need to create a normal Rust package.
-This can either be a binary or library crate, they are working nearly the same.
+First, you need to create a normal Rust package which can either be a binary or library crate.
+A binary crate has a main function that will be executed when initializing the main function, a library crate needs a few more additional compiler flags to compile successfully.
 
 As binary:
 ```shell
 cargo init --bin my-package .
 ```
 
-As library
+As library:
 ```shell
 cargo init --lib my-package .
 ```
@@ -45,14 +45,14 @@ mlua = { version = ">=0.9.3", features = ["lua51", "vendored"] }
 
 ### `build.rs`
 
-You need to set some additional compiler options to be able to call your wasm code from Javascript:
+You need to set some additional compiler flags to be able to call your wasm code from Javascript:
 - `-sEXPORTED_RUNTIME_METHODS=['cwrap','ccall']`: this exports the `cwrap` and `ccall` Javascript functions which allows us to call our library methods
 - `-sEXPORT_ES6=1`: this makes the created js glue ES6 compatible. It is not mandatory in general but needed as this tutorial/examples utilizes ES6 imports
 - `-sERROR_ON_UNDEFINED_SYMBOLS=0` (_optional for binary crates_): this ignores undefined symbols. Typically undefined symbols are not really undefined but the linker just can't find them, which is always the case if your crate is a library
 
 > If your package is a library, you have to add some additional options:
 > - `--no-entry`: this defines that the compiled wasm has no main function
-> - `-o<library name>.js`: by default, only a `.wasm` file is created, but some js glue is needed to call the built wasm file (and the wasm file needs some functions of the glue too). This creates the glue `<library name>.js` file and changes the name of the wasm output file to `<library name>.wasm`. This must be removed when running tests because it changes the output filename and the Rust test suite can't track this
+> - `-o<library name>.js`: by default, only a `.wasm` file is created, but some js glue is needed to call the built wasm file (and the wasm file needs some functions of the glue too). This creates the glue `<library name>.js` file and changes the name of the wasm output file to `<library name>.wasm`. This must be removed when running tests because it changes the output filename and the Rust test suite can't track this.
 
 The best way to do this is by specifying the args in a `build.rs` file which guarantees that they are set when compiling:
 ```rust,ignore
@@ -70,7 +70,6 @@ fn main() {
 > // the output files should be placed in the "root" build directory (e.g. 
 > // target/wasm32-unknown-emscripten/debug) but there is no env variable which 
 > // provides this path, so it must be extracted this way
->
 > let target_path = std::path::PathBuf::from(out_dir)
 >     .parent()
 >     .unwrap()

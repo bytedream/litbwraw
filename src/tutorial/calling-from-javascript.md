@@ -58,7 +58,7 @@ const module = {
         stderr.appendChild(line);
     }
 };
-// this loads the wasm file and exposes the `ccall` and `cwrap` functions whic we'll
+// this loads the wasm file and exposes the `ccall` and `cwrap` functions which we'll
 // use in the following code
 const myProject = await wasm.default(module);
 ```
@@ -156,7 +156,7 @@ class MyProject {
 	#stdout;
 	#stderr;
 	
-	static async init(): Promise<MyProject> {
+	static async init() {
 		const myProject = new MyProject();
 		
 		const wasm = await import('./target/wasm32-unknown-emscripten/debug/my-project.js');

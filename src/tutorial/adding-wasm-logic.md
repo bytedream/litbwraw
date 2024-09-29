@@ -15,7 +15,7 @@ pub extern "C" fn lua_new() -> *mut mlua::Lua {
 Alright, good.
 Now we have a Lua instance, but no way to use it, so let us create one.
 <br>
-The function takes the pointer to the Lua struct we create in the `new_lua` function as well as an arbitrary string, which should be lua code, as parameters.
+The function takes the pointer to the Lua struct we create in the `new_lua` function, as well as an arbitrary string, which should be lua code, as parameters.
 It then executes this string via the Lua instance and may write to `stderr` if an error occurs.
 ```rust,ignore
 #[no_mangle]
