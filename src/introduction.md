@@ -7,5 +7,8 @@ This smol book describes how to use Lua in the Browser, powered by Rust WebAssem
 ---
 
 ```lua,editable
+-- Hello world example that executes right in your browser.
+-- This is an interactive REPL, you can write any Lua code you want here.
+
 print("Hello from WebAssembly Lua!")
 ```
