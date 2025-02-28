@@ -4,6 +4,11 @@ Before we can start developing, a few prerequisites must be fulfilled.
 
 ## The Rust toolchain
 
+Because Lua relies on some libc functions that aren't available in bare-bones WebAssembly (aka `wasm32-unknown-unknown`), the `wasm32-unknown-emscripten` toolchain is used, which provides a custom libc implementation.
+The downside of this toolchain is the compatability with the existing Rust WebAssembly ecosystem.
+Some crates that state to have WebAssembly support, are only supporting `wasm32-unknown-unknown` which might lead to some compatability problems.
+
+To add the toolchain via rustup, use:
 ```shell
 rustup target add wasm32-unknown-emscripten
 ```
