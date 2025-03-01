@@ -3,4 +3,7 @@
 
 book
 
+/node_modules/
 /target/
+
+benchmarks/benches

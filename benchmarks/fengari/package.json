@@ -1,0 +1,10 @@
+{
+  "name": "fengari",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "dependencies": {
+    "fengari": "=0.1.4"
+  },
+  "private": true
+}
