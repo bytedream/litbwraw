@@ -5,7 +5,7 @@ The used benchmark code is from the [Computer Language Benchmarks Game](https://
 
 Note that these are only micro-benchmarks. They test one very specific implementation of something, whereas a real program would use multiple or complete other things that aren't tested here.
 
-The benchmark sources can be found [here](https://github.com/bytedream/litbwraw/tree/main/lua-playground).
+The benchmark sources can be found [here](https://github.com/bytedream/litbwraw/tree/main/benchmarks).
 
 ### Environment
 
@@ -21,7 +21,7 @@ Software:
 - NodeJS v23.7.0
 - Emscripten v4.0.4
 
-Tested Software:
+Benchmarked Software:
 - WebAssembly (wasm); mlua v0.10.3
 - Fengari (fengari); fengari v0.1.4
 
