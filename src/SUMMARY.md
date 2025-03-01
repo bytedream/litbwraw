@@ -10,3 +10,4 @@
   - [Calling from Javascript](tutorial/calling-from-javascript.md)
 - [Testing](./testing.md)
 - [Examples](./examples.md)
+- [Benchmarks](./benchmarks.md)
