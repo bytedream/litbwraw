@@ -39,13 +39,13 @@ jobs:
         run: BOOK_OUTPUT_PATH="$PWD/book" cargo build --release --manifest-path=lua-playground/Cargo.toml --target wasm32-unknown-emscripten
 
       - name: Setup Pages
-        uses: actions/configure-pages@v2
+        uses: actions/configure-pages@v5
 
       - name: Upload book
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
         with:
           path: ./book
 
       - name: Deploy
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4
