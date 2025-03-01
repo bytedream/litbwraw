@@ -2,7 +2,7 @@ use std::env;
 use std::path::PathBuf;
 
 fn main() {
-    let book_output_path = env::var("BOOK_OUTPUT_PATH").map_or(None, Some);
+    let book_output_path = env::var("BOOK_OUTPUT_PATH").ok();
 
     let out_dir = env::var("OUT_DIR").unwrap();
     let pkg_name = env::var("CARGO_PKG_NAME").unwrap();
@@ -19,5 +19,12 @@ fn main() {
     println!("cargo:rustc-link-arg=-sEXPORT_ES6=1");
     println!("cargo:rustc-link-arg=-sERROR_ON_UNDEFINED_SYMBOLS=0");
     println!("cargo:rustc-link-arg=--no-entry");
-    println!("cargo:rustc-link-arg=-o{}.js", book_output_path.map(PathBuf::from).unwrap_or(target_path).join(pkg_name).to_string_lossy());
+    println!(
+        "cargo:rustc-link-arg=-o{}.js",
+        book_output_path
+            .map(PathBuf::from)
+            .unwrap_or(target_path)
+            .join(pkg_name)
+            .to_string_lossy()
+    );
 }

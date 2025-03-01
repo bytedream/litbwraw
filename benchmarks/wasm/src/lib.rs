@@ -1,9 +1,9 @@
-#![warn(clippy::missing_safety_doc)]
+#![allow(clippy::missing_safety_doc)]
 
 use mlua::Lua;
-use std::ffi::{c_char, c_int, CStr};
+use std::ffi::{CStr, c_char, c_int};
 
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn execute(program: *const c_char, argc: c_int, argv: *const *const c_char) {
     let lua = Lua::new();
     let lua_globals = lua.globals();
@@ -13,12 +13,12 @@ pub unsafe extern "C" fn execute(program: *const c_char, argc: c_int, argv: *con
     arg.set(-1, "mlua").unwrap();
     arg.set(0, "execute").unwrap();
     for i in 0..argc {
-        let argv_arg = CStr::from_ptr(*argv.offset(i as isize));
+        let argv_arg = unsafe { CStr::from_ptr(*argv.offset(i as isize)) };
         arg.push(argv_arg.to_str().unwrap()).unwrap();
     }
     lua_globals.set("arg", arg).unwrap();
 
-    let exec = CStr::from_ptr(program).to_str().unwrap();
+    let exec = unsafe { CStr::from_ptr(program).to_str().unwrap() };
     if let Err(err) = lua.load(exec).exec() {
         eprintln!("{}", err)
     }
