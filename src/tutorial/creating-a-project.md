@@ -29,7 +29,7 @@ The `vendored` feature is always required for wasm.
 [package]
 name = "my-project"
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
 
 [dependencies]
 mlua = { version = ">=0.9.3", features = ["lua51", "vendored"] }
@@ -48,7 +48,6 @@ mlua = { version = ">=0.9.3", features = ["lua51", "vendored"] }
 You need to set some additional compiler flags to be able to call your wasm code from Javascript:
 - `-sEXPORTED_RUNTIME_METHODS=['cwrap','ccall']`: this exports the `cwrap` and `ccall` Javascript functions which allows us to call our library methods
 - `-sEXPORT_ES6=1`: this makes the created js glue ES6 compatible. It is not mandatory in general but needed as this tutorial/examples utilizes ES6 imports
-- `-sERROR_ON_UNDEFINED_SYMBOLS=0` (_optional for binary crates_): this ignores undefined symbols. Typically undefined symbols are not really undefined but the linker just can't find them, which is always the case if your crate is a library
 
 > If your package is a library, you have to add some additional options:
 > - `--no-entry`: this defines that the compiled wasm has no main function
@@ -79,7 +78,6 @@ fn main() {
 >     .unwrap()
 >     .join(pkg_name);
 > 
-> println!("cargo:rustc-link-arg=-sERROR_ON_UNDEFINED_SYMBOLS=0");
 > println!("cargo:rustc-link-arg=--no-entry");
 > println!("cargo:rustc-link-arg=-o{}.js", target_path.to_string_lossy());
 > ```
