@@ -3,7 +3,7 @@
 ## Create the project package
 
 First, you need to create a normal Rust package which can either be a binary or library crate.
-A binary crate has a main function that will be executed when initializing the main function, a library crate needs a few more additional compiler flags to compile successfully.
+A binary crate has a main function that will be executed when initializing the wasm module, a library crate needs a few more additional compiler flags to compile successfully.
 
 As binary:
 ```shell
