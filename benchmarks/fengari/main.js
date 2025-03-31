@@ -23,6 +23,6 @@ for (let i = 0; i < args.length; i++) {
     lua.lua_pushstring(L, args[i]);
     lua.lua_rawseti(L, -2, i + 1);
 }
-lua.lua_setglobal(L, 'arg')
+lua.lua_setglobal(L, 'arg');
 
 lauxlib.luaL_dostring(L, fengari.to_luastring(program));
